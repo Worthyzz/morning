@@ -52,7 +52,7 @@ def get_words():
 
 def lucky():
   conn = http.client.HTTPSConnection('api.tianapi.com')
-        params = urllib.parse.urlencode({'key':ef4370c0fbe5eed37c23c7ba6e48e948,'astro':pisces})
+        params = urllib.parse.urlencode({'key':'ef4370c0fbe5eed37c23c7ba6e48e948','astro':'pisces'})
         headers = {'Content-type':'application/x-www-form-urlencoded'}
         conn.request('POST','/star/index',params,headers)
         res = conn.getresponse()
