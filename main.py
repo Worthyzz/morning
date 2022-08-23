@@ -52,16 +52,14 @@ def get_words():
 
 def lucky():
   conn = http.client.HTTPSConnection('api.tianapi.com')
-        params = urllib.parse.urlencode({'key':'ef4370c0fbe5eed37c23c7ba6e48e948','astro':'pisces'})
-        headers = {'Content-type':'application/x-www-form-urlencoded'}
-        conn.request('POST','/star/index',params,headers)
-        res = conn.getresponse()
-        data = res.read()
-        data = json.loads(data)
-        data = "速配星座："+str(data["newslist"][7]["content"])+"\n爱情指数："+str(data["newslist"][1]["content"])+"   工作指数："+str(data["newslist"][2]["content"])+"\n今日概述："+str(data["newslist"][8]["content"])
-        return data
-    else:
-        return ""
+  params = urllib.parse.urlencode({'key':ef4370c0fbe5eed37c23c7ba6e48e948,'astro':pisces})
+  headers = {'Content-type':'application/x-www-form-urlencoded'}
+  conn.request('POST','/star/index',params,headers)
+  res = conn.getresponse()
+  data = res.read()
+  data = json.loads(data)
+  data = "速配星座："+str(data["newslist"][7]["content"])+"\n爱情指数："+str(data["newslist"][1]["content"])+"   工作指数："+str(data["newslist"][2]["content"])+"\n今日概述："+str(data["newslist"][8]["content"])
+  return data      
       
 def get_random_color():
   return "#%06x" % random.randint(0, 0xFFFFFF)
