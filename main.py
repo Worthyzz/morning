@@ -70,7 +70,7 @@ client = WeChatClient(app_id, app_secret)
 
 wm = WeChatMessage(client)
 wea, low ,high ,jintian ,airQuality = get_weather()
-data = {"jintian":{"value":today, "color":get_random_color()},
+data = {"jintian":{"value":jintian, "color":get_random_color()},
         "city":{"value":city, "color":get_random_color()},
         "weather":{"value":wea, "color":get_random_color()},
         "low":{"value":low, "color":get_random_color()},
