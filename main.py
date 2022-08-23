@@ -59,7 +59,7 @@ def lucky():
   res = conn.getresponse()
   data = res.read()
   data = json.loads(data)
-  data = "速配星座："+str(data["newslist"][7]["content"])+"\n爱情指数："+str(data["newslist"][1]["content"])+"   工作指数："+str(data["newslist"][2]["content"])+"\n今日概述："+str(data["newslist"][8]["content"])
+  data = str(data["newslist"][8]["content"]) + "/n爱情指数：" + str(data["newslist"][2]["content"])
   return data      
       
 def get_random_color():
