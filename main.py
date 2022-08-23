@@ -49,6 +49,19 @@ def get_words():
     return get_words()
   return words.json()['data']['text']
 
+def lucky():
+  conn = http.client.HTTPSConnection('api.tianapi.com')
+        params = urllib.parse.urlencode({'key':ef4370c0fbe5eed37c23c7ba6e48e948,'astro':pisces})
+        headers = {'Content-type':'application/x-www-form-urlencoded'}
+        conn.request('POST','/star/index',params,headers)
+        res = conn.getresponse()
+        data = res.read()
+        data = json.loads(data)
+        data = "速配星座："+str(data["newslist"][7]["content"])+"\n爱情指数："+str(data["newslist"][1]["content"])+"   工作指数："+str(data["newslist"][2]["content"])+"\n今日概述："+str(data["newslist"][8]["content"])
+        return data
+    else:
+        return ""
+      
 def get_random_color():
   return "#%06x" % random.randint(0, 0xFFFFFF)
 
@@ -66,7 +79,8 @@ data = {"jintian":{"value":jintian, "color":get_random_color()},
         "love_days":{"value":get_count(), "color":get_random_color()},
         "birthday_left":{"value":get_birthday(), "color":get_random_color()},
         "birthday_left2":{"value":get_birthday2(), "color":get_random_color()},
-        "words":{"value":get_words(), "color":get_random_color()}}
+        "words":{"value":get_words(), "color":get_random_color()}},
+        "lucky":{"value":lucky(), "color":get_random_color()}}
 res = wm.send_template(user_id, template_id, data)
 res2 = wm.send_template(user_id2, template_id, data)
 print(res)
