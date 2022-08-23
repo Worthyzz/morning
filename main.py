@@ -59,8 +59,22 @@ def lucky():
   res = conn.getresponse()
   data = res.read()
   data = json.loads(data)
-  data = str(data["newslist"][8]["content"]) + "/n爱情指数：" + str(data["newslist"][2]["content"])
-  return data      
+  data = str(data["newslist"][8]["content"]) + "\n爱情指数：" + str(data["newslist"][2]["content"])
+  return data    
+
+def tip():
+  conn = http.client.HTTPSConnection('api.tianapi.com')  #接口域名
+  params = urllib.parse.urlencode({'key':'ef4370c0fbe5eed37c23c7ba6e48e948','city':'芜湖市'})
+  headers = {'Content-type':'application/x-www-form-urlencoded'}
+  conn.request('POST','/tianqi/index',params,headers)
+  res = conn.getresponse()
+  data = res.read()
+  data = json.loads(data)
+  pop = data["newslist"][0]["pop"]
+  tips = data["newslist"][0]["tips"]
+  week = data["newslist"][0]["week"]
+  tips = data["newslist"][0]["tips"]
+  return pop,week,tips
       
 def get_random_color():
   return "#%06x" % random.randint(0, 0xFFFFFF)
@@ -69,8 +83,10 @@ def get_random_color():
 client = WeChatClient(app_id, app_secret)
 
 wm = WeChatMessage(client)
+pop,week,tips = tip()
 wea, low ,high ,jintian ,airQuality = get_weather()
 data = {"jintian":{"value":jintian, "color":get_random_color()},
+        "week":{"value":week, "color":get_random_color()},
         "city":{"value":city, "color":get_random_color()},
         "weather":{"value":wea, "color":get_random_color()},
         "low":{"value":low, "color":get_random_color()},
@@ -81,6 +97,8 @@ data = {"jintian":{"value":jintian, "color":get_random_color()},
         "birthday_left2":{"value":get_birthday2(), "color":get_random_color()},
         "words":{"value":get_words(), "color":get_random_color()},
         "lucky":{"value":lucky(), "color":get_random_color()}}
+        "pop":{"value":pop, "color":get_random_color()}}
+        "tips":{"value":tips, "color":get_random_color()}}
 res = wm.send_template(user_id, template_id, data)
 res2 = wm.send_template(user_id2, template_id, data)
 print(res)
