@@ -64,7 +64,7 @@ def lucky():
 
 def tip():
   conn = http.client.HTTPSConnection('api.tianapi.com')  #接口域名
-  params = urllib.parse.urlencode({'key':'ef4370c0fbe5eed37c23c7ba6e48e948','city':'武汉市'})
+  params = urllib.parse.urlencode({'key':'ef4370c0fbe5eed37c23c7ba6e48e948','city':'芜湖市'})
   headers = {'Content-type':'application/x-www-form-urlencoded'}
   conn.request('POST','/tianqi/index',params,headers)
   res = conn.getresponse()
