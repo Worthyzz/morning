@@ -70,11 +70,10 @@ def tip():
   res = conn.getresponse()
   data = res.read()
   data = json.loads(data)
-  pop = data["newslist"][0]["pop"]
   tips = data["newslist"][0]["tips"]
   week = data["newslist"][0]["week"]
   tips = data["newslist"][0]["tips"]
-  return pop,week,tips
+  return week,tips
       
 def get_random_color():
   return "#%06x" % random.randint(0, 0xFFFFFF)
@@ -83,7 +82,7 @@ def get_random_color():
 client = WeChatClient(app_id, app_secret)
 
 wm = WeChatMessage(client)
-pop,week,tips = tip()
+week,tips = tip()
 wea, low ,high ,jintian ,airQuality = get_weather()
 data = {"jintian":{"value":jintian, "color":get_random_color()},
         "week":{"value":week, "color":get_random_color()},
@@ -97,7 +96,6 @@ data = {"jintian":{"value":jintian, "color":get_random_color()},
         "birthday_left2":{"value":get_birthday2(), "color":get_random_color()},
         "words":{"value":get_words(), "color":get_random_color()},
         "lucky":{"value":lucky(), "color":get_random_color()},
-        "pop":{"value":pop, "color":get_random_color()},
         "tips":{"value":tips, "color":get_random_color()}}
 res = wm.send_template(user_id, template_id, data)
 res2 = wm.send_template(user_id2, template_id, data)
