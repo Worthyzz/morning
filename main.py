@@ -59,7 +59,7 @@ def lucky():
   res = conn.getresponse()
   data = res.read()
   data = json.loads(data)
-  data = str(data["newslist"][8]["content"]) + "\n爱情指数：" + str(data["newslist"][2]["content"])
+  data = str(data["newslist"][8]["content"]) + "\n爱情指数：" + str(data["newslist"][2]["content"]) + "\n"
   return data    
 
 def tip():
