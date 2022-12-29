@@ -75,6 +75,7 @@ def tip():
   tips = data["newslist"][0]["tips"]
   return week,tips
       
+  
 def get_random_color():
   return "#%06x" % random.randint(0, 0xFFFFFF)
 
