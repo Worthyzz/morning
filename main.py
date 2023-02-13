@@ -23,17 +23,6 @@ user_id2 = os.environ["USER_ID2"]
 template_id = os.environ["TEMPLATE_ID"]
 
 
-def get_weather(): 
-  conn = http.client.HTTPSConnection('apis.tianapi.com')  #接口域名
-  params = urllib.parse.urlencode({'key':'ef4370c0fbe5eed37c23c7ba6e48e948','city':'芜湖市','type':'1'})
-  headers = {'Content-type':'application/x-www-form-urlencoded'}
-  conn.request('POST','/tianqi/index',params,headers)
-  tianapi = conn.getresponse()
-  result = tianapi.read()
-  data = result.decode('utf-8')
-  dict_data = json.loads(data)
-  return dict_data['newslist'][6]['content'],dict_data['newslist'][10]['content'],dict_data['newslist'][1]['content'],dict_data['newslist'][22]['content']
-
 def get_count():
   delta = today - datetime.strptime(start_date, "%Y-%m-%d")
   return delta.days
@@ -77,8 +66,12 @@ def tip():
   data = json.loads(data)
   tips = data["newslist"][0]["tips"]
   week = data["newslist"][0]["week"]
-  tips = data["newslist"][0]["tips"]
-  return week,tips
+  wea = data["newslist"][0]["weather"]
+  low = data["newslist"][0]["lowest"]
+  high = data["newslist"][0]["highest"]
+  jintian = data["newslist"][0]["date"]
+  airQuality = data["newslist"][0]["quality"]
+  return week,tips,wea, low ,high ,jintian ,airQuality
       
   
 def get_random_color():
@@ -88,8 +81,7 @@ def get_random_color():
 client = WeChatClient(app_id, app_secret)
 
 wm = WeChatMessage(client)
-week,tips = tip()
-wea, low ,high ,jintian ,airQuality = get_weather()
+week,tips,wea, low ,high ,jintian ,airQuality = tip()
 data = {"jintian":{"value":jintian, "color":get_random_color()},
         "week":{"value":week, "color":get_random_color()},
         "city":{"value":city, "color":get_random_color()},
