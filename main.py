@@ -32,7 +32,7 @@ def get_weather():
   result = tianapi.read()
   data = result.decode('utf-8')
   dict_data = json.loads(data)
-  return dict_data['newslist'][6]['content'],dict_data['newslist'][10]['content'],,dict_data['newslist'][1]['content'],,dict_data['newslist'][22]['content']
+  return dict_data['newslist'][6]['content'],dict_data['newslist'][10]['content'],dict_data['newslist'][1]['content'],dict_data['newslist'][22]['content']
 
 def get_count():
   delta = today - datetime.strptime(start_date, "%Y-%m-%d")
