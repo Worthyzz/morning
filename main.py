@@ -70,8 +70,8 @@ def tip():
   low = data["newslist"][0]["lowest"]
   high = data["newslist"][0]["highest"]
   jintian = data["newslist"][0]["date"]
-  airQuality = data["newslist"][0]["quality"]
-  return week,tips,wea, low ,high ,jintian ,airQuality
+ # airQuality = data["newslist"][0]["quality"]
+  return week,tips,wea, low ,high ,jintian
       
   
 def get_random_color():
@@ -81,14 +81,14 @@ def get_random_color():
 client = WeChatClient(app_id, app_secret)
 
 wm = WeChatMessage(client)
-week,tips,wea, low ,high ,jintian ,airQuality = tip()
+week,tips,wea, low ,high ,jintian = tip()
 data = {"jintian":{"value":jintian, "color":get_random_color()},
         "week":{"value":week, "color":get_random_color()},
         "city":{"value":city, "color":get_random_color()},
         "weather":{"value":wea, "color":get_random_color()},
         "low":{"value":low, "color":get_random_color()},
         "high":{"value":high, "color":get_random_color()},
-        "airQuality":{"value":airQuality, "color":get_random_color()},
+        #"airQuality":{"value":airQuality, "color":get_random_color()},
         "love_days":{"value":get_count(), "color":get_random_color()},
         "birthday_left":{"value":get_birthday(), "color":get_random_color()},
         "birthday_left2":{"value":get_birthday2(), "color":get_random_color()},
