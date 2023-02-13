@@ -23,11 +23,16 @@ user_id2 = os.environ["USER_ID2"]
 template_id = os.environ["TEMPLATE_ID"]
 
 
-def get_weather():
-  url = "http://autodev.openspeech.cn/csp/api/v2.1/weather?openId=aiuicus&clientType=android&sign=android&city=" + city
-  res = requests.get(url).json()
-  weather = res['data']['list'][0]
-  return weather['weather'], math.floor(weather['low']), math.floor(weather['high']), weather['date'], weather['airQuality']
+def get_weather(): 
+  conn = http.client.HTTPSConnection('apis.tianapi.com')  #接口域名
+  params = urllib.parse.urlencode({'key':'ef4370c0fbe5eed37c23c7ba6e48e948','city':'芜湖市','type':'1'})
+  headers = {'Content-type':'application/x-www-form-urlencoded'}
+  conn.request('POST','/tianqi/index',params,headers)
+  tianapi = conn.getresponse()
+  result = tianapi.read()
+  data = result.decode('utf-8')
+  dict_data = json.loads(data)
+  return dict_data['newslist'][6]['content'],dict_data['newslist'][10]['content'],,dict_data['newslist'][1]['content'],,dict_data['newslist'][22]['content']
 
 def get_count():
   delta = today - datetime.strptime(start_date, "%Y-%m-%d")
