@@ -80,6 +80,8 @@ def get_random_color():
 
 client = WeChatClient(app_id, app_secret)
 
+
+
 wm = WeChatMessage(client)
 week,tips,wea, low ,high ,jintian = tip()
 data = {"jintian":{"value":jintian, "color":get_random_color()},
