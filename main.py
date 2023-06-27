@@ -84,7 +84,7 @@ client = WeChatClient(app_id, app_secret)
 
 wm = WeChatMessage(client)
 week,tips,wea, low ,high ,jintian = tip()
-data = {"jintian":{"value":today, "color":get_random_color()},
+data = {
         "city":{"value":city, "color":get_random_color()},
         "love_days":{"value":get_count(), "color":get_random_color()},
         "birthday_left":{"value":get_birthday(), "color":get_random_color()},
