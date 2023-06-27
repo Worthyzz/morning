@@ -90,7 +90,7 @@ data = {"jintian":{"value":today, "color":get_random_color()},
         "birthday_left":{"value":get_birthday(), "color":get_random_color()},
         "birthday_left2":{"value":get_birthday2(), "color":get_random_color()},
         "words":{"value":get_words(), "color":get_random_color()},
-        "lucky":{"value":lucky(), "color":get_random_color()}
+        "lucky":{"value":lucky(), "color":get_random_color()}}
 res = wm.send_template(user_id, template_id, data)
 res2 = wm.send_template(user_id2, template_id, data)
 print(res)
